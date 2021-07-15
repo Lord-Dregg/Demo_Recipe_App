@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import './homepage.dart';
+//import './homepage.dart';
 import './login_page.dart';
 
 class Splash extends StatefulWidget {
@@ -11,12 +11,16 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  //FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), () {
-      if (_auth.currentUser != null)
+    Future.delayed(Duration(seconds: 8), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+      /*if (_auth.currentUser != null)
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -26,7 +30,7 @@ class _SplashState extends State<Splash> {
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
         );
-      }
+      }*/
     });
 
     return Scaffold(

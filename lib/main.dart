@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Cooper',
       ),
       home: Scaffold(
-        body: HomePage(),
+        body: Home(),
       ),
       routes: routes,
     );
