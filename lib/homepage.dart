@@ -326,6 +326,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
         title: Text('Recipe App Home'),
         actions: [
           IconButton(
