@@ -50,7 +50,8 @@ class _HomeState extends State<Home> {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Container();
+          return Center(
+              child: Text('Some Error Occured. Please Restart the App'));
         }
 
         // Once complete, show your application
