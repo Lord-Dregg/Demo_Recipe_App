@@ -80,9 +80,10 @@ class _HomePageState extends State<HomePage> {
       child: TextFormField(
         controller: searchController,
         onFieldSubmitted: (value) {
-          if (value.isNotEmpty)
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SearchPage(value)));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchPage(value)),
+          );
         },
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -103,65 +104,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-
-    /* final Widget card = Material(
-      elevation: 7.0,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Container(
-        padding: EdgeInsets.only(
-          left: 10,
-          right: 10,
-        ),
-        height: 150.0,
-        width: 250.0,
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.0, color: Colors.transparent),
-          borderRadius: BorderRadius.circular(12.0),
-          color: Colors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            CircleAvatar(
-              radius: 50.0,
-              backgroundImage: NetworkImage(image.toString()),
-            ),
-            SizedBox(
-              width: 20.0,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  name.toString(),
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                ),
-                //SizedBox(height: 3),
-                Text(
-                  'with Fruit Salad',
-                  style: TextStyle(fontSize: 13),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  height: 3,
-                  width: 75,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.orange,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10.0),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-*/
 
     Widget getCard(String name, String image) {
       getResult();
