@@ -72,13 +72,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = TextEditingController();
+    //final searchController = TextEditingController();
 
     final Widget searchBar = Material(
       elevation: 10.0,
       borderRadius: BorderRadius.circular(25.0),
       child: TextFormField(
-        controller: searchController,
+        //controller: searchController,
         onFieldSubmitted: (value) {
           Navigator.push(
             context,
