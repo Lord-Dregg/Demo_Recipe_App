@@ -21,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: 0.85 * MediaQuery.of(context).size.width,
       height: 0.38 * MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
+        color: Colors.orangeAccent,
         boxShadow: [
           BoxShadow(
             color: Colors.grey,
@@ -29,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ],
         borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(width: 1.8, color: Colors.lightBlue),
+        border: Border.all(width: 1.8, color: Colors.orangeAccent),
       ),
       child: Container(
         padding: EdgeInsets.all(10.0),
@@ -72,6 +73,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: MaterialButton(
                   minWidth: 200,
                   height: 42,
+                  splashColor: Colors.orangeAccent,
+                  highlightColor: Colors.orangeAccent,
                   onPressed: () {
                     setState(() {
                       isLoading = true;
@@ -101,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                     });
                   },
-                  color: Colors.lightBlueAccent,
+                  color: Colors.orangeAccent,
                   child:
                       Text('Register', style: TextStyle(color: Colors.white)),
                 ),

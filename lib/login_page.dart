@@ -25,12 +25,15 @@ class _LoginPageState extends State<LoginPage> {
     final Widget loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16),
       child: Material(
+        color: Colors.orangeAccent,
         borderRadius: BorderRadius.circular(30),
-        shadowColor: Colors.lightBlueAccent.shade100,
+        shadowColor: Colors.orangeAccent.shade100,
         elevation: 5,
         child: MaterialButton(
           minWidth: 200,
           height: 42,
+          splashColor: Colors.orangeAccent,
+          highlightColor: Colors.orangeAccent,
           onPressed: () {
             setState(() {
               isLoading = true;
@@ -60,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               }
             });
           },
-          color: Colors.lightBlueAccent.shade100,
+          color: Colors.orangeAccent.shade100,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         ),
       ),
@@ -70,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 0.85 * MediaQuery.of(context).size.width,
       height: 0.38 * MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
+        color: Colors.orangeAccent,
         boxShadow: [
           BoxShadow(
             color: Colors.grey,
@@ -125,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: Text(
         'Don\'t have an account? Create one now',
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.orangeAccent),
       ),
     );
 
