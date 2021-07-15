@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
           contentPadding: EdgeInsets.only(left: 10.0, top: 15.0),
           hintStyle: TextStyle(
             fontFamily: 'Cooper',
-            color: Colors.grey,
+            color: Colors.orangeAccent,
           ),
           hintText: 'Search a Recipe',
         ),
