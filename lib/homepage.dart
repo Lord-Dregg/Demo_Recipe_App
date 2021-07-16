@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
       'https://t4.ftcdn.net/jpg/02/07/87/79/240_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg';
   String name = 'Can\'t fetch data right now';
   String image = placeholderImage;
+  //String randomName = 'Can\'t fetch data right now';
+  String randomImage = placeholderImage;
 
   String getMonth() {
     var months = [
@@ -48,18 +50,20 @@ class _HomePageState extends State<HomePage> {
     return day.toString();
   }
 
-  Future getResult() async {
+  Future getRandom() async {
     http.Response response = await http.get(Uri.parse(
-        'https://api.spoonacular.com/recipes/random?number=1&apiKey=567c799a91de47d3bad11c19dad899e4'));
+        'https://api.spoonacular.com/recipes/random?number=2&apiKey=567c799a91de47d3bad11c19dad899e4'));
     var result = jsonDecode(response.body);
 
     setState(() {
       if (result['status'] == null) {
         name = result['recipes'][0]['title'];
         image = result['recipes'][0]['image'];
+        randomImage = result['recipes'][1]['image'];
       } else {
         name = 'Can\'t fetch \ndata right now';
         image = placeholderImage;
+        randomImage = placeholderImage;
       }
     });
   }
@@ -67,7 +71,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    this.getResult();
+    //this.getResult();
+    this.getRandom();
   }
 
   @override
@@ -106,7 +111,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget getCard(String name, String image) {
-      getResult();
+      //getRandom();
       return Material(
         elevation: 7.0,
         borderRadius: BorderRadius.circular(12.0),
@@ -208,63 +213,66 @@ class _HomePageState extends State<HomePage> {
       ],
     );
 
-    final Widget footer = Container(
-      height: 215,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                  image,
+    Widget getFooter() {
+      getRandom();
+      return Container(
+        height: 215,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.0),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    randomImage,
+                  ),
+                  fit: BoxFit.fill,
                 ),
-                fit: BoxFit.fill,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              borderRadius: BorderRadius.circular(10.0),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 50.0,
-              bottom: 50.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'BEST OF\nTHE DAY',
-                  style: TextStyle(
-                    wordSpacing: 5.0,
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontFamily: 'Comic',
-                    fontWeight: FontWeight.w600,
+            Padding(
+              padding: EdgeInsets.only(
+                left: 50.0,
+                bottom: 50.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'BEST OF\nTHE DAY',
+                    style: TextStyle(
+                      wordSpacing: 5.0,
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontFamily: 'Comic',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  width: 60.0,
-                  height: 3.0,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(5),
+                  SizedBox(height: 10),
+                  Container(
+                    width: 60.0,
+                    height: 3.0,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -335,6 +343,7 @@ class _HomePageState extends State<HomePage> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 3,
                               itemBuilder: (context, index) {
+                                getRandom();
                                 return getCard(name, image);
                               },
                             ),
@@ -342,7 +351,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 30),
                           header2,
                           SizedBox(height: 30),
-                          footer,
+                          getFooter(),
                         ],
                       ),
                     ),
