@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
 
   List<String> getRandomItem() {
     List<String> end = [placeholderName, placeholderImage];
-    print('Get Random Called');
+    //print('Get Random Called');
     fetchData();
     if (result.containsKey('recipes')) {
       end[0] = result['recipes'][0]['title'].toString();
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget getCard() {
-      print('Get Card Called');
+      //print('Get Card Called');
       //getRandom();
       return Material(
         elevation: 7.0,
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget getFooter() {
-      print('Footer Called');
+      //print('Footer Called');
 
       return Container(
         height: 215,

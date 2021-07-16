@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
 
     setState(() {
       if (res.containsKey('number')) itemCount = res['number'];
-      print(itemCount);
+      //print(itemCount);
     });
   }
 
@@ -162,7 +162,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget getTiles(BuildContext context, int i) {
-    print('Search GetTiles Called');
+    // print('Search GetTiles Called');
     if (res.containsKey('results')) {
       name = res['results'][i]['title'].toString();
       imageUrl = res['results'][i]['image'].toString();
