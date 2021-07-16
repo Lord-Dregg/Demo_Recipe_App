@@ -18,7 +18,7 @@ class _SearchPageState extends State<SearchPage> {
   var imageUrl = '';
   var name = 'Loading...';
   var itemCount = 1;
-  var res;
+  Map res = {};
   //List searchresults = [];
 
   Future getResult() async {
@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
     res = jsonDecode(response.body);
 
     setState(() {
-      if (res['status'] == null) itemCount = res['number'];
+      if (res.containsKey('number')) itemCount = res['number'];
       print(itemCount);
     });
   }
@@ -162,7 +162,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget getTiles(BuildContext context, int i) {
-    if (res['status'] == null) {
+    print('Search GetTiles Called');
+    if (res.containsKey('results')) {
       name = res['results'][i]['title'].toString();
       imageUrl = res['results'][i]['image'].toString();
       return buildTile(name, imageUrl);

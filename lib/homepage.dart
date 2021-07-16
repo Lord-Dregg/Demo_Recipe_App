@@ -15,10 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static const placeholderImage =
       'https://t4.ftcdn.net/jpg/02/07/87/79/240_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg';
-  String name = 'Can\'t fetch data right now';
-  String image = placeholderImage;
+  static const placeholderName = 'Can\'t fetch data right now';
   //String randomName = 'Can\'t fetch data right now';
-  String randomImage = placeholderImage;
 
   String getMonth() {
     var months = [
@@ -50,12 +48,27 @@ class _HomePageState extends State<HomePage> {
     return day.toString();
   }
 
-  Future getRandom() async {
+  Map result = {};
+  Future fetchData() async {
     http.Response response = await http.get(Uri.parse(
-        'https://api.spoonacular.com/recipes/random?number=2&apiKey=567c799a91de47d3bad11c19dad899e4'));
-    var result = jsonDecode(response.body);
+        'https://api.spoonacular.com/recipes/random?number=1&apiKey=567c799a91de47d3bad11c19dad899e4'));
+    var res = jsonDecode(response.body);
+    result = res;
+  }
 
-    setState(() {
+  List<String> getRandomItem() {
+    List<String> end = [placeholderName, placeholderImage];
+    print('Get Random Called');
+    fetchData();
+    if (result.containsKey('recipes')) {
+      end[0] = result['recipes'][0]['title'].toString();
+      end[1] = result['recipes'][0]['image'].toString();
+      return end;
+    } else {
+      return end;
+    }
+
+    /* setState(() {
       if (result['status'] == null) {
         name = result['recipes'][0]['title'];
         image = result['recipes'][0]['image'];
@@ -65,14 +78,14 @@ class _HomePageState extends State<HomePage> {
         image = placeholderImage;
         randomImage = placeholderImage;
       }
-    });
+    });*/
   }
 
   @override
   void initState() {
     super.initState();
     //this.getResult();
-    this.getRandom();
+    //this.getRandom();
   }
 
   @override
@@ -110,7 +123,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    Widget getCard(String name, String image) {
+    Widget getCard() {
+      print('Get Card Called');
       //getRandom();
       return Material(
         elevation: 7.0,
@@ -132,7 +146,7 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               CircleAvatar(
                 radius: 50.0,
-                backgroundImage: NetworkImage(image.toString()),
+                backgroundImage: NetworkImage(getRandomItem()[1].toString()),
               ),
               SizedBox(
                 width: 20.0,
@@ -142,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    name.toString(),
+                    getRandomItem()[0].toString(),
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 10),
@@ -214,7 +228,8 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget getFooter() {
-      getRandom();
+      print('Footer Called');
+
       return Container(
         height: 215,
         width: double.infinity,
@@ -231,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white.withOpacity(0.0),
                 image: DecorationImage(
                   image: NetworkImage(
-                    randomImage,
+                    getRandomItem()[1],
                   ),
                   fit: BoxFit.fill,
                 ),
@@ -343,8 +358,8 @@ class _HomePageState extends State<HomePage> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 3,
                               itemBuilder: (context, index) {
-                                getRandom();
-                                return getCard(name, image);
+                                //getRandom();
+                                return getCard();
                               },
                             ),
                           ),
